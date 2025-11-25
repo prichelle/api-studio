@@ -1,0 +1,12 @@
+kind: assertion
+apiVersion: api.ibm.com/v1
+metadata:
+  name: rest
+  namespace: TestNano
+  version: '1.0'
+  tags: []
+spec:
+  - name: status code
+    key: responseStatus
+    value: 200
+    action: equals
