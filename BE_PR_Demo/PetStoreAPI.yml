@@ -1,0 +1,14 @@
+kind: API
+apiVersion: api.ibm.com/v1
+metadata:
+  name: PetstoreAPI
+  namespace: PetstoreProject
+  version: '1.0'
+  tags:
+    - datapower-apigateway
+  type: REST
+spec:
+  api-spec:
+    $path: ./PetstoreAPI-spec.yml
+  policy-sequence:
+    - $ref: BE_PR_Demo:invokeBackend:1.0
