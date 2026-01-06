@@ -1,0 +1,47 @@
+kind: assertion
+metadata:
+  version: '1.0'
+  namespace: default
+  name: GET-details-200
+  tags: []
+apiVersion: api.ibm.com/v1
+spec:
+  - name: Validate the response status code
+    key: code
+    action: equals
+    value: 200
+  - name: Validate content type header
+    key: responseHeaders.content-type
+    action: equals
+    value: application/json
+  - name: Validate response schema
+    key: json()
+    action: validateSchema
+    value:
+      description: The format of the branch field.
+      properties:
+        address:
+          properties:
+            city:
+              description: The city of the address
+              type: string
+            state:
+              description: The state of the address
+              type: string
+            street1:
+              description: The first line of the address
+              type: string
+            street2:
+              description: The second line of the address
+              type: string
+            zip_code:
+              description: The zip code of the address
+              type: string
+          type: object
+        id:
+          description: The ID of the branch
+          type: string
+        type:
+          description: The type of branch
+          type: string
+      type: object

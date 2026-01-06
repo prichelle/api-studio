@@ -10,3 +10,6 @@ spec:
     - key: clientId
       isSecret: true
       value: $(clientId)
+    - key: test
+      isSecret: false
+      value: hello
