@@ -1,0 +1,74 @@
+components:
+  schemas:
+    address:
+      properties:
+        city:
+          description: The city of the address
+          example: San Diego
+          type: string
+        state:
+          description: The state of the address
+          example: CA
+          type: string
+        street1:
+          description: The first line of the address
+          example: 4660 La Jolla Village Drive
+          type: string
+        street2:
+          description: The second line of the address
+          example: Suite 300
+          type: string
+        zip_code:
+          description: The zip code of the address
+          example: '92122'
+          type: string
+      type: object
+    branch:
+      description: The format of the branch field.
+      properties:
+        address:
+          $ref: '#/components/schemas/address'
+        id:
+          description: The ID of the branch
+          example: "\t9d72ece0-7e7b-11e5-9038-55f9f9c08c06"
+          type: string
+        type:
+          description: The type of branch
+          example: atm
+          type: string
+      type: object
+  securitySchemes:
+    clientID:
+      type: apiKey
+      in: header
+      name: X-IBM-Client-Id
+security:
+  - clientID: []
+info:
+  contact:
+    name: pierre richelle
+  title: findbranch
+  version: 3.0.3
+  x-ibm-name: findbranch
+  description: demo
+openapi: 3.0.2
+paths:
+  /details:
+    get:
+      operationId: getBranches
+      description: get branches
+      tags:
+        - findbranch
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/branch'
+          description: 200 OK
+servers:
+  - url: /findbranch
+tags:
+  - description: banka findbranch
+    name: findbranch

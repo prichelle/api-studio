@@ -1,0 +1,13 @@
+kind: API
+apiVersion: api.ibm.com/v1
+metadata:
+  name: bankBranchesAPI
+  namespace: BE_PR_BANK
+  version: '1.0'
+  tags: []
+  type: REST
+spec:
+  api-spec:
+    $path: ./bankBranchesAPI-spec.yml
+  policy-sequence:
+    - $ref: BE_PR_BANK:invoke:1.0

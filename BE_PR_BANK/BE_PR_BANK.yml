@@ -1,0 +1,13 @@
+kind: Product
+apiVersion: api.ibm.com/v1
+metadata:
+  name: BE_PR_BANK
+  namespace: BE_PR_BANK
+  version: '1.0'
+  tags: []
+  description: ''
+spec:
+  apis:
+    - $ref: BE_PR_BANK:bankBranchesAPI:1.0
+  plans:
+    - $ref: BE_PR_BANK:free:1.0
