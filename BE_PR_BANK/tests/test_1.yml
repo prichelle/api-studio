@@ -1,0 +1,23 @@
+kind: test
+apiVersion: api.ibm.com/v1
+metadata:
+  namespace: BE_PR_BANK
+  name: test_1
+  version: "1.0"
+  tags: []
+spec:
+  api:
+    $ref: BE_PR_BANK:bankBranchesAPI:1.0
+  environment:
+    $ref: BE_PR_BANK:BE_PR:1.0
+  request:
+    - method: GET
+      resource: /details
+      headers:
+        - key: accept
+          value: application/json
+        - key: X-IBM-Client-Id
+          value: ${X-IBM-Client-Id_value}
+      parameters: []
+      assertions:
+        $ref: default:GET-details-200:1.0

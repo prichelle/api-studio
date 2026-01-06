@@ -1,0 +1,12 @@
+kind: environment
+metadata:
+  version: '1.0'
+  namespace: BE_PR_BANK
+  name: test_1-1_0-environment
+  tags: []
+apiVersion: api.ibm.com/v1
+spec:
+  variables:
+    - key: X-IBM-Client-Id_value
+      isSecret: true
+      value: ''

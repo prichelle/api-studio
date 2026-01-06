@@ -1,0 +1,12 @@
+kind: environment
+apiVersion: api.ibm.com/v1
+metadata:
+  name: BE_PR
+  version: "1.0"
+  namespace: BE_PR_BANK
+  tags: []
+spec:
+  variables:
+    - key: clientId
+      isSecret: true
+      value: $(clientId)
