@@ -6,7 +6,4 @@ metadata:
   tags: []
 apiVersion: api.ibm.com/v1
 spec:
-  variables:
-    - key: X-IBM-Client-Id_value
-      isSecret: true
-      value: 'b3b6c90a956c100dcd33a94dd0097943'
+  variables: []
