@@ -161,7 +161,4 @@ servers:
   - url: /productorders
 tags:
   - name: orders
-    description: ''
-    externalDocs:
-      url: ''
-      description: ''
+    description: 'product order'

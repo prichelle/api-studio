@@ -10,4 +10,4 @@ spec:
   api-spec:
     $path: ./ProductOrders-spec.yml
   policy-sequence:
-    - $ref: BE_PR_BANK:invoke:1.0
+    - $ref: BE_PR_BANK:productOrders-dp:1.0

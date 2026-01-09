@@ -1,0 +1,25 @@
+kind: DataPowerAssembly
+apiVersion: api.ibm.com/v1
+metadata:
+  name: productOrders-dp
+  namespace: BE_PR_BANK
+  version: '1.0'
+  tags: []
+  labels:
+    gatewayTypes:
+      - datapower
+spec:
+  x-ibm-configuration:
+    enforced: true
+    testable: true
+    phase: realized
+    gateway: datapower-api-gateway
+    assembly:
+      execute:
+        - gatewayscript:
+            version: 2.3.0
+            title: gatewayscript
+            source: |2
+                              var response = {"echo":"success"};
+
+                              context.message.body.write(JSON.stringify(response));
