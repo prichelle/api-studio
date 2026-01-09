@@ -1,0 +1,13 @@
+kind: MCPServerConfig
+apiVersion: api.ibm.com/v1
+metadata:
+  name: ServerBankBranches
+  namespace: default
+  version: '1.0'
+  tags: []
+spec:
+  tools:
+    - $ref: default:ToolBankBranches:1.0
+  server:
+    mode: stdio
+  log-level: INFO

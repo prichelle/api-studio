@@ -1,0 +1,18 @@
+kind: MCPTool
+apiVersion: api.ibm.com/v1
+metadata:
+  name: ToolBankBranches
+  namespace: default
+  version: '1.0'
+  tags: []
+  description: ''
+spec:
+  tools:
+    - name: getBranches
+      description: get branches
+      inputSchema:
+        type: object
+        properties: {}
+      x-original-path: /details
+  api:
+    $path: bankBranchesAPI-spec.yml
