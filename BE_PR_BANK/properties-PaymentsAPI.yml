@@ -1,0 +1,14 @@
+kind: Properties
+apiVersion: api.ibm.com/v1
+metadata:
+  name: properties-PaymentsAPI
+  namespace: BE_PR_BANK
+  version: '1.0'
+  tags: []
+  description: ''
+spec:
+  target-url:
+    value: >-
+      http://ir-payment-backend-http-ace.cp4i-bl-5b7e0d81360e5972646d63308bd04bf7-0000.eu-de.containers.appdomain.cloud:80
+    description: The URL of the target service
+    encoded: false

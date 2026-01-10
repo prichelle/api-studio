@@ -1,0 +1,17 @@
+kind: API
+apiVersion: api.ibm.com/v1
+metadata:
+  name: PaymentsAPI
+  namespace: BE_PR_BANK
+  version: 1.0.0
+  tags: []
+  type: REST
+spec:
+  api-spec:
+    $path: ./PaymentsAPI-spec.yml
+  cors:
+    $ref: BE_PR_BANK:cors-PaymentsAPI:1.0
+  properties:
+    $ref: BE_PR_BANK:properties-PaymentsAPI:1.0
+  policy-sequence:
+    - $ref: BE_PR_BANK:assembly-PaymentsAPI:1.0

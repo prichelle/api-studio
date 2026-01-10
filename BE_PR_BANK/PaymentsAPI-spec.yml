@@ -1,0 +1,203 @@
+openapi: 3.0.0
+info:
+  title: PaymentsAPI
+  version: 1.0.0
+  description: PaymentsAPI
+  x-ibm-name: paymentsapi
+servers:
+  - url: /paymentsapi/v1
+paths:
+  /payments/{id}:
+    get:
+      operationId: getId
+      description: Retrieve id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment'
+    delete:
+      operationId: deleteId
+      description: Remove from id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation was successful.
+  /payments:
+    post:
+      operationId: postPayments
+      description: >-
+        submit a new payment for a beneficiary. After submission the state is in
+        pending. It will need an execute to finalyse the payment.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentRequest'
+      responses:
+        '200':
+          description: return the status of the payment submission and an Id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statusresponse'
+    get:
+      operationId: getPayments
+      description: |-
+        Retrieve all stored payments
+        Payments are identified by a uniqeu Ie 
+      responses:
+        '200':
+          description: Return the list of stored payments execution.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payments'
+    delete:
+      operationId: deletePayments
+      description: Remove from payments
+      responses:
+        '200':
+          description: The operation was successful.
+  /payments/execute:
+    post:
+      operationId: postExecute
+      description: >-
+        To complete a payment, an execution needs to be send with the Id of the
+        payment.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/execute'
+      responses:
+        '200':
+          description: The status of the execution is provided in the response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statusresponse'
+components:
+  schemas:
+    payment:
+      type: object
+      properties:
+        sender:
+          type: string
+        benificiary:
+          type: string
+        amount:
+          type: integer
+        state:
+          type: string
+        id:
+          type: string
+      required:
+        - benificiary
+        - amount
+    statusresponse:
+      type: object
+      properties:
+        state:
+          type: string
+        id:
+          type: string
+    execute:
+      type: object
+      properties:
+        id:
+          type: string
+    paymentRequest:
+      type: object
+      properties:
+        sender:
+          type: string
+        beneficiary:
+          type: string
+        amount:
+          type: integer
+    payments:
+      type: array
+      items:
+        $ref: '#/components/schemas/payment'
+  securitySchemes:
+    clientID:
+      type: apiKey
+      in: header
+      name: X-IBM-Client-Id
+security:
+  - clientID: []
+x-ibm-configuration:
+  cors:
+    enabled: true
+  properties:
+    target-url:
+      value: >-
+        http://ir-payment-backend-http-ace.cp4i-bl-5b7e0d81360e5972646d63308bd04bf7-0000.eu-de.containers.appdomain.cloud:80
+      description: The URL of the target service
+      encoded: false
+  phase: realized
+  enforced: true
+  gateway: datapower-api-gateway
+  assembly:
+    execute:
+      - invoke:
+          version: 2.0.0
+          title: invoke
+          backend-type: detect
+          header-control:
+            type: blocklist
+            values:
+              - ^X-IBM-Client-Id$
+          parameter-control:
+            type: blocklist
+          timeout: 60
+          verb: keep
+          chunked-uploads: true
+          persistent-connection: true
+          target-url: $(target-url)$(request.path)
+          follow-redirects: false
+          inject-proxy-headers: true
+      - operation-switch:
+          version: 2.0.0
+          title: operation-switch
+          case:
+            - operations:
+                - getPayments
+              execute:
+                - parse:
+                    version: 2.1.0
+                    title: parse
+                    parse-settings-reference:
+                      default: apic-default-parsesettings
+                    use-content-type: true
+                - redact:
+                    version: 2.0.0
+                    title: redact
+                    redactions:
+                      - action: redact
+                        path: message.body.**.amount
+          otherwise: []
+    catch: []
+    finally: []
+  type: rest
+  testable: true
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload

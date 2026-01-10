@@ -1,0 +1,67 @@
+kind: DataPowerAssembly
+apiVersion: api.ibm.com/v1
+metadata:
+  name: assembly-PaymentsAPI
+  namespace: BE_PR_BANK
+  version: '1.0'
+  tags: []
+spec:
+  x-ibm-configuration:
+    cors:
+      enabled: true
+    properties:
+      target-url:
+        value: >-
+          http://ir-payment-backend-http-ace.cp4i-bl-5b7e0d81360e5972646d63308bd04bf7-0000.eu-de.containers.appdomain.cloud:80
+        description: The URL of the target service
+        encoded: false
+    phase: realized
+    enforced: true
+    gateway: datapower-api-gateway
+    assembly:
+      execute:
+        - invoke:
+            version: 2.0.0
+            title: invoke
+            backend-type: detect
+            header-control:
+              type: blocklist
+              values:
+                - ^X-IBM-Client-Id$
+            parameter-control:
+              type: blocklist
+            timeout: 60
+            verb: keep
+            chunked-uploads: true
+            persistent-connection: true
+            target-url: $(target-url)$(request.path)
+            follow-redirects: false
+            inject-proxy-headers: true
+        - operation-switch:
+            version: 2.0.0
+            title: operation-switch
+            case:
+              - operations:
+                  - getPayments
+                execute:
+                  - parse:
+                      version: 2.1.0
+                      title: parse
+                      parse-settings-reference:
+                        default: apic-default-parsesettings
+                      use-content-type: true
+                  - redact:
+                      version: 2.0.0
+                      title: redact
+                      redactions:
+                        - action: redact
+                          path: message.body.**.amount
+            otherwise: []
+      catch: []
+      finally: []
+    type: rest
+    testable: true
+    activity-log:
+      enabled: true
+      success-content: activity
+      error-content: payload
