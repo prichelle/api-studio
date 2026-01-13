@@ -9,8 +9,6 @@ metadata:
 spec:
   api-spec:
     $path: ./PaymentsAPI-spec.yml
-  cors:
-    $ref: BE_PR_BANK:cors-PaymentsAPI:1.0
   properties:
     $ref: BE_PR_BANK:properties-PaymentsAPI:1.0
   policy-sequence:
