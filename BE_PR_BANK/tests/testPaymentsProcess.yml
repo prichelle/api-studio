@@ -1,0 +1,52 @@
+kind: test
+apiVersion: api.ibm.com/v1
+metadata:
+  namespace: BE_PR_BANK
+  name: testPaymentsProcess
+  version: "1.0"
+  tags: []
+spec:
+  api:
+    $ref: BE_PR_BANK:PaymentsAPI:1.0.0
+  environment:
+    $ref: BE_PR_BANK:env-tz:1.0
+  request:
+    - method: GET
+      resource: /payments
+      headers:
+        - key: accept
+          value: application/json
+        - key: X-IBM-Client-Id
+          value: ${X-IBM-Client-Id_value}
+      parameters: []
+      assertions:
+        $ref: default:GET-payments-200:1.0
+    - method: POST
+      resource: /payments
+      headers:
+        - key: accept
+          value: application/json
+        - key: content-type
+          value: application/json
+        - key: X-IBM-Client-Id
+          value: ${X-IBM-Client-Id_value}
+      parameters: []
+      assertions:
+        $ref: default:POST-payments-200:1.0
+      payload:
+        raw:
+          json: |-
+            {
+              "sender": "prichelleDemo",
+              "beneficiary": "acme",
+              "amount": 1000
+            }
+    - method: GET
+      resource: /payments/{id}
+      headers: []
+      parameters:
+        - key: id
+          value: ""
+          description: ""
+      assertions:
+        $ref: default:GET-payments-string-200:1.0

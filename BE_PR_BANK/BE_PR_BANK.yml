@@ -11,3 +11,18 @@ spec:
     - $ref: BE_PR_BANK:PaymentsAPI:1.0.0
   plans:
     - $ref: BE_PR_BANK:free:1.0
+  extensions:
+    portal-config:
+      apiVersion: api.ibm.com/v1
+      spec:
+        visibility:
+          view:
+            type: public
+            orgs: []
+            enabled: true
+            tags: []
+          subscribe:
+            type: authenticated
+            orgs: []
+            enabled: true
+            tags: []

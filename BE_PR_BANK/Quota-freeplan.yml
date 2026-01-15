@@ -1,19 +1,16 @@
-kind: Plan
+kind: Quota
 apiVersion: api.ibm.com/v1
 metadata:
-  name: free
+  name: Quota-freeplan
   namespace: BE_PR_BANK
   version: '1.0'
   tags: []
   description: ''
 spec:
-  qos:
-    withQuota: {}
+  maxRequest: 5
+  interval: 1m
   extensions:
     dp-gateway:
       apiVersion: api.ibm.com/v1
       spec:
-        withRateLimit:
-          - name: free-plan
-            maxRequest: 5
-            interval: 1m
+        onLimitReach: block

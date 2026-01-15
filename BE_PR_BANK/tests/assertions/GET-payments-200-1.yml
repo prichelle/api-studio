@@ -1,0 +1,37 @@
+kind: assertion
+metadata:
+  version: '1.0'
+  namespace: default
+  name: GET-payments-200-1
+  tags: []
+apiVersion: api.ibm.com/v1
+spec:
+  - name: Validate the response status code
+    key: code
+    action: equals
+    value: 200
+  - name: Validate content type header
+    key: responseHeaders.content-type
+    action: equals
+    value: application/json
+  - name: Validate response schema
+    key: json()
+    action: validateSchema
+    value:
+      type: array
+      items:
+        type: object
+        properties:
+          sender:
+            type: string
+          benificiary:
+            type: string
+          amount:
+            type: integer
+          state:
+            type: string
+          id:
+            type: string
+        required:
+          - benificiary
+          - amount
