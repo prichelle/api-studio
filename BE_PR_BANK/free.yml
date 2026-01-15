@@ -8,7 +8,9 @@ metadata:
   description: ''
 spec:
   qos:
-    withQuota: {}
+    withQuota:
+      plan-limit:
+        - $ref: BE_PR_BANK:Quota-freeplan:1.0
   extensions:
     dp-gateway:
       apiVersion: api.ibm.com/v1

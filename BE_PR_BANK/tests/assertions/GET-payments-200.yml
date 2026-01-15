@@ -13,25 +13,8 @@ spec:
   - name: Validate content type header
     key: responseHeaders.content-type
     action: equals
-    value: application/json
+    value: application/json;charset=utf-8
   - name: Validate response schema
     key: json()
     action: validateSchema
-    value:
-      type: array
-      items:
-        type: object
-        properties:
-          sender:
-            type: string
-          benificiary:
-            type: string
-          amount:
-            type: integer
-          state:
-            type: string
-          id:
-            type: string
-        required:
-          - benificiary
-          - amount
+    value: '{"type":"array","items":{"type":"object","properties":{"sender":{"type":"string"},"benificiary":{"type":"string"},"amount":{"type":"integer"},"state":{"type":"string"},"id":{"type":"string"}},"required":["benificiary","amount"]}}'

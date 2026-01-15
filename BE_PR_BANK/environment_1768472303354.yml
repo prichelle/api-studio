@@ -9,4 +9,4 @@ spec:
   variables:
     - key: X-IBM-Client-Id_value
       isSecret: false
-      value: 3d3f1a91d13477b75c5ed696b08a1ab7
+      value: 559c927663c838ec07eb0ac2645c7288

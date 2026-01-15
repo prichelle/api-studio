@@ -17,10 +17,4 @@ spec:
   - name: Validate response schema
     key: json()
     action: validateSchema
-    value:
-      type: object
-      properties:
-        state:
-          type: string
-        id:
-          type: string
+    value: '{"type":"object","properties":{"state":{"type":"string"},"id":{"type":"string"}}}'
