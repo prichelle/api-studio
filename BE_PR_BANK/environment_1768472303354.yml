@@ -9,4 +9,7 @@ spec:
   variables:
     - key: X-IBM-Client-Id_value
       isSecret: false
-      value: 559c927663c838ec07eb0ac2645c7288
+      value: ff2cadb37ecd59f8e2ec02165baf4bd0
+    - key: gw-ep
+      isSecret: false
+      value: https://dpgw.apps.ocp-int-5b7e0d81360e5972646d63308bd04bf7-0000.eu-de.containers.appdomain.cloud/innovative-org/sandbox

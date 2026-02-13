@@ -2,11 +2,11 @@ kind: environment
 metadata:
   version: '1.0'
   namespace: BE_PR_BANK
-  name: test_1-1_0-environment
+  name: getPayments-1_0-environment
   tags: []
 apiVersion: api.ibm.com/v1
 spec:
   variables:
     - key: X-IBM-Client-Id_value
-      isSecret: false
-      value: b3b6c90a956c100dcd33a94dd0097943
+      isSecret: true
+      value: ''

@@ -99,7 +99,7 @@ components:
       properties:
         sender:
           type: string
-        benificiary:
+        beneficiary:
           type: string
         amount:
           type: integer
@@ -108,7 +108,7 @@ components:
         id:
           type: string
       required:
-        - benificiary
+        - beneficiary
         - amount
     statusresponse:
       type: object

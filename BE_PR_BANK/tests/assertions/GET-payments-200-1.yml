@@ -2,7 +2,7 @@ kind: assertion
 metadata:
   version: '1.0'
   namespace: default
-  name: GET-payments-200
+  name: GET-payments-200-1
   tags: []
 apiVersion: api.ibm.com/v1
 spec:
@@ -17,5 +17,21 @@ spec:
   - name: Validate response schema
     key: json()
     action: validateSchema
-    value: '{"type":"array","items":{"type":"object","properties":{"sender":{"type":"string"},"beneficiary":{"type":"string"},"amount":{"type":"integer"},"state":{"type":"string"},"id":{"type":"string"}},"required":["beneficiary","amount"]}}'
-    stopOnFail: true
+    value:
+      type: array
+      items:
+        type: object
+        properties:
+          sender:
+            type: string
+          beneficiary:
+            type: string
+          amount:
+            type: integer
+          state:
+            type: string
+          id:
+            type: string
+        required:
+          - beneficiary
+          - amount

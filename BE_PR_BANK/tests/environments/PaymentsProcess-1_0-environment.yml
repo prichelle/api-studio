@@ -9,4 +9,4 @@ spec:
   variables:
     - key: X-IBM-Client-Id_value
       isSecret: true
-      value: ''
+      value: $(X-IBM-Client-Id_value)

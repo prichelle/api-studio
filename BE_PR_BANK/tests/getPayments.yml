@@ -2,12 +2,12 @@ kind: test
 apiVersion: api.ibm.com/v1
 metadata:
   namespace: BE_PR_BANK
-  name: TestPayments
+  name: getPayments
   version: "1.0"
   tags: []
 spec:
   api:
-    $ref: BE_PR_BANK:PaymentsAPI:1.0.0
+    $endpoint: https://dpgw.apps.ocp-int-5b7e0d81360e5972646d63308bd04bf7-0000.eu-de.containers.appdomain.cloud/innovative-org/sandbox/paymentsapi/v1
   environment:
     $ref: BE_PR_BANK:env-tz:1.0
   request:
@@ -20,4 +20,4 @@ spec:
           value: ${X-IBM-Client-Id_value}
       parameters: []
       assertions:
-        $ref: default:GET-payments-200:1.0
+        $ref: default:GET-payments-200-1:1.0
